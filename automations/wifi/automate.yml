@@ -1,0 +1,84 @@
+---
+crosscompute: 0.9.4
+name: QRCreate
+title: QRCreate by CrossCompute - The User-Friendly Free QR Code Generator
+slug: qr-create
+description: Generate free custom QR codes effortlessly with QRCreate by CrossCompute. Simplify information sharing with our easy-to-use and efficient QR code tool.
+version: 0.0.1
+input:
+    variables:
+        - id: network_name
+          path: variables.dictionary
+          view: string
+          label: Network name
+        - id: hidden
+          path: variables.dictionary
+          view: radio
+          label: Hidden
+          configuration:
+            options:
+              - name: 'Yes'
+                value: 'true'
+              - name: 'No'
+                value: 'false'
+        - id: password
+          path: ENVIRONMENT
+          view: password
+          label: Password
+        - id: encryption
+          path: variables.dictionary
+          view: radio
+          label: Encryption
+          configuration:
+            options:
+              - name: None
+                value: ''
+              - name: WPA/WPA2
+                value: WPA
+              - name: WEP
+                value: WEP
+        - id: fill_color
+          view: color-picker
+          path: variables.dictionary
+        - id: back_color
+          view: color-picker
+          path: variables.dictionary
+        - id: logo_path
+          view: file
+          path: logo.png
+          configuration:
+            mime-types:
+              - image/png
+              - image/jpeg
+        - id: style
+          view: radio
+          path: variables.dictionary
+          configuration:
+            options:
+              - name: Rounded
+                value: rounded
+              - name: Square
+                value: square
+              - name: Gapped Square
+                value: gapped-square
+              - name: Circle
+                value: circle
+              - name: Vertical Bars
+                value: vertical
+              - name: Horizontal Bars
+                value: horizontal
+
+output:
+    variables:
+        - id: qr
+          view: image
+          path: qr.png
+batches:
+    - folder: batches/standard
+scripts:
+    - path: run.ipynb
+display:
+    pages:
+        - id: output
+          configuration:
+            design: none
